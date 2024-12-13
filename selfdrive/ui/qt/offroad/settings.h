@@ -100,18 +100,6 @@ private:
 
 
 
-class SelectCar : public QWidget {
-  Q_OBJECT
-public:
-  explicit SelectCar(QWidget* parent = 0);
-
-private:
-
-signals:
-  void backPress();
-  void selectedCar();
-
-};
 class CarrotPanel : public QWidget {
     Q_OBJECT
 
@@ -129,7 +117,6 @@ private:
     ListWidget* startToggles;
     ListWidget* speedToggles;
 
-    SelectCar* selectCar = nullptr;
     void togglesCarrot(int widgetIndex);
 
 public:
