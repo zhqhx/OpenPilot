@@ -505,7 +505,7 @@ class CarState(CarStateBase):
     if CP.flags & HyundaiFlags.CANFD_HDA2 and CP.flags & HyundaiFlags.CAMERA_SCC:
       pt_messages += [
         ("HDA_INFO_4A3", 5),
-        ("NEW_MSG_4B4", 10),
+        #("NEW_MSG_4B4", 10),  # G80 hda2개조차량은 안나옴. 원래그런건지.. 어짜피 안쓰는데이터이니깐...
       ]
     #if CP.flags & HyundaiFlags.CANFD_HDA2 and CP.extFlags & HyundaiExtFlags.NAVI_CLUSTER.value and not (CP.extFlags & HyundaiExtFlags.SCC_BUS2.value):
     #  pt_messages.append(("CLUSTER_SPEED_LIMIT", 10))
