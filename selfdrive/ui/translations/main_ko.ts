@@ -88,6 +88,37 @@
     </message>
 </context>
 <context>
+    <name>CarrotPanel</name>
+    <message>
+        <source>Cruise</source>
+        <translation type="unfinished">크루즈</translation>
+    </message>
+    <message>
+        <source>Tuning</source>
+        <translation type="unfinished">튜닝</translation>
+    </message>
+    <message>
+        <source>Disp</source>
+        <translation type="unfinished">화면</translation>
+    </message>
+    <message>
+        <source>Path</source>
+        <translation type="unfinished">패쓰</translation>
+    </message>
+    <message>
+        <source>Start</source>
+        <translation type="unfinished">시작</translation>
+    </message>
+    <message>
+        <source>Speed</source>
+        <translation type="unfinished">속도</translation>
+    </message>
+    <message>
+        <source>SELECT YOUR CAR</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ConfirmationDialog</name>
     <message>
         <source>Ok</source>
@@ -265,6 +296,81 @@
     <message>
         <source>PAIR</source>
         <translation>동기화</translation>
+    </message>
+</context>
+<context>
+    <name>DrawCarrot</name>
+    <message>
+        <source>MANUAL</source>
+        <translation type="vanished">수동운전</translation>
+    </message>
+    <message>
+        <source>CRUISE</source>
+        <translation type="vanished">정속주행</translation>
+    </message>
+    <message>
+        <source>E2ECRUISE</source>
+        <translation type="vanished">E2E주행</translation>
+    </message>
+    <message>
+        <source>CRUISE READY</source>
+        <translation type="vanished">크루즈준비</translation>
+    </message>
+    <message>
+        <source>SIGN DETECTED</source>
+        <translation type="vanished">신호감지</translation>
+    </message>
+    <message>
+        <source>ECO</source>
+        <translation>연비</translation>
+    </message>
+    <message>
+        <source>SAFE</source>
+        <translation>안전</translation>
+    </message>
+    <message>
+        <source>NORM</source>
+        <translation>일반</translation>
+    </message>
+    <message>
+        <source>FAST</source>
+        <translation>고속</translation>
+    </message>
+    <message>
+        <source>Start</source>
+        <translation type="vanished">시작</translation>
+    </message>
+    <message>
+        <source>Cruise</source>
+        <translation type="vanished">크루즈</translation>
+    </message>
+    <message>
+        <source>Speed</source>
+        <translation type="vanished">속도</translation>
+    </message>
+    <message>
+        <source>Tuning</source>
+        <translation type="vanished">튜닝</translation>
+    </message>
+    <message>
+        <source>Disp</source>
+        <translation type="vanished">화면</translation>
+    </message>
+    <message>
+        <source>Path</source>
+        <translation type="vanished">패쓰</translation>
+    </message>
+    <message>
+        <source>Lane Follow</source>
+        <translation type="vanished">레인모드</translation>
+    </message>
+    <message>
+        <source>Laneless</source>
+        <translation type="vanished">레인리스</translation>
+    </message>
+    <message>
+        <source>ERRM</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -612,6 +718,10 @@ This may take up to a minute.</source>
     <message>
         <source>Developer</source>
         <translation>개발자</translation>
+    </message>
+    <message>
+        <source>Carrot</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1061,6 +1171,10 @@ This may take up to a minute.</source>
         <source>Enable driver monitoring even when openpilot is not engaged.</source>
         <translation>Openpilot이 활성화되지 않은 경우에도 드라이버 모니터링을 활성화합니다.</translation>
     </message>
+    <message>
+        <source>MoreRelaxed</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Updater</name>
@@ -1143,75 +1257,4 @@ This may take up to a minute.</source>
         <translation>삭제</translation>
     </message>
 </context>
-  <context>
-    <name>DrawCarrot</name>
-    <message>
-      <source>MANUAL</source>
-      <translation>수동운전</translation>
-    </message>
-    <message>
-      <source>CRUISE</source>
-      <translation>정속주행</translation>
-    </message>
-    <message>
-      <source>E2ECRUISE</source>
-      <translation>E2E주행</translation>
-    </message>
-    <message>
-      <source>CRUISE READY</source>
-      <translation>크루즈준비</translation>
-    </message>
-    <message>
-      <source>SIGN DETECTED</source>
-      <translation>신호감지</translation>
-    </message>
-    <message>
-      <source>ECO</source>
-      <translation>연비</translation>
-    </message>
-    <message>
-      <source>SAFE</source>
-      <translation>안전</translation>
-    </message>
-    <message>
-      <source>NORM</source>
-      <translation>일반</translation>
-    </message>
-    <message>
-      <source>FAST</source>
-      <translation>고속</translation>
-    </message>
-    <message>
-      <source>Start</source>
-      <translation>시작</translation>
-    </message>
-    <message>
-      <source>Cruise</source>
-      <translation>크루즈</translation>
-    </message>
-    <message>
-      <source>Speed</source>
-      <translation>속도</translation>
-    </message>
-    <message>
-      <source>Tuning</source>
-      <translation>튜닝</translation>
-    </message>
-    <message>
-      <source>Disp</source>
-      <translation>화면</translation>
-    </message>
-    <message>
-      <source>Path</source>
-      <translation>패쓰</translation>
-    </message>
-    <message>
-      <source>Lane Follow</source>
-      <translation>레인모드</translation>
-    </message>
-    <message>
-      <source>Laneless</source>
-      <translation>레인리스</translation>
-    </message>
-  </context>
 </TS>
