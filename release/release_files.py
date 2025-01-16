@@ -54,6 +54,7 @@ whitelist = [
   "tools/bodyteleop/",
   "tools/joystick/",
   "tools/longitudinal_maneuvers/",
+  "selfdrive/data/params/d/*",
 
   "tinygrad_repo/openpilot/compile2.py",
   "tinygrad_repo/extra/onnx.py",
