@@ -54,7 +54,14 @@ whitelist = [
   "tools/bodyteleop/",
   "tools/joystick/",
   "tools/longitudinal_maneuvers/",
-  "selfdrive/data/params/d/*",
+  "data/params/d/*",
+
+  # Ford and Lincoln related files
+  "selfdrive/car/ford/*",
+  "opendbc_repo/opendbc/car/ford/*",
+  "opendbc_repo/dbc/FORD_CADS.dbc",
+  "opendbc_repo/dbc/ford_fusion_2018_adas.dbc",
+  "opendbc_repo/dbc/ford_lincoln_base_pt.dbc",
 
   "tinygrad_repo/openpilot/compile2.py",
   "tinygrad_repo/extra/onnx.py",
