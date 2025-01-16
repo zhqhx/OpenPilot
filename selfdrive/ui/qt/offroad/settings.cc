@@ -647,9 +647,11 @@ CarrotPanel::CarrotPanel(QWidget* parent) : QWidget(parent) {
       QStringList items = get_list("/data/params/d/SupportedCars");
       QStringList items_gm = get_list("/data/params/d/SupportedCars_gm");
       QStringList items_toyota = get_list("/data/params/d/SupportedCars_toyota");
+      QStringList items_ford = get_list("/data/params/d/SupportedCars_ford");
       cars.append(items);
       cars.append(items_gm);
       cars.append(items_toyota);
+      cars.append(items_ford);
 
       QString selectedCar = MultiOptionDialog::getSelection("Select your car", cars, ((selected == "[ Not Selected ]") || (selected.length() == 0)) ? cars[0] : selected, this);
       if (!selectedCar.isEmpty()) {
