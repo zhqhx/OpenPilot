@@ -1002,6 +1002,15 @@ FW_VERSIONS = {
       b'\xf1\x00NE1 MFC  AT USA LHD 1.00 1.06 99211-GI010 230110',
     ],
   },
+  CAR.HYUNDAI_IONIQ_5_N: {
+    (Ecu.fwdRadar, 0x7d0, None): [
+      b'\xf1\x00NE1N RDR -----      1.00 1.00 99110-NI000         ',
+    ],
+    (Ecu.fwdCamera, 0x7c4, None): [
+      b'\xf1\x00NE1NMFC  AT KOR LHD 1.00 1.04 99211-NI000 231219',
+      b'\xf1\x00NE1NMFC  AT USA LHD 1.00 1.04 99211-NI000 231219',
+    ],
+  },
   CAR.HYUNDAI_IONIQ_6: {
     (Ecu.fwdRadar, 0x7d0, None): [
       b'\xf1\x00CE__ RDR -----      1.00 1.01 99110-KL000         ',
@@ -1173,4 +1182,28 @@ FW_VERSIONS = {
       b'\xf1\x00US4_ RDR -----      1.00 1.00 99110-CG000         ',
     ],
   },
+  CAR.KIA_EV9: {  # (MV)
+    (Ecu.fwdRadar, 0x7d0, None): [
+      b'\xf1\x00MV__ RDR -----      1.00 1.02 99110-DO700         ',
+      b'\xf1\x00MV__ RDR -----      1.00 1.02 99110-DO000         '
+    ],
+    (Ecu.fwdCamera, 0x7c4, None): [
+      b'\xf1\x00MV  MFC  AT KOR LHD 1.00 1.01 99211-DO000 230419',
+      b'\xf1\x00MV  MFC  AT USA LHD 1.00 1.02 99211-DO000 230616',
+      b'\xf1\x00MV  MFC  AT EUR LHD 1.00 1.02 99211-DO000 230616',
+    ],
+  },
+  CAR.HYUNDAI_SANTAFE_MX5: {  # (MX5)
+    (Ecu.fwdRadar, 0x7d0, None): [
+    ],
+    (Ecu.fwdCamera, 0x7c4, None): [
+    ],
+  },
+  CAR.HYUNDAI_SANTAFE_MX5_HEV: {  # (MX5)
+    (Ecu.fwdRadar, 0x7d0, None): [
+    ],
+    (Ecu.fwdCamera, 0x7c4, None): [
+    ],
+  },
+  
 }

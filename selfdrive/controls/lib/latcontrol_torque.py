@@ -6,6 +6,7 @@ from openpilot.common.numpy_fast import interp
 from openpilot.selfdrive.controls.lib.latcontrol import LatControl
 from openpilot.common.pid import PIDController
 from openpilot.selfdrive.controls.lib.vehicle_model import ACCELERATION_DUE_TO_GRAVITY
+from openpilot.common.params import Params
 
 # At higher speeds (25+mph) we can assume:
 # Lateral acceleration achieved by a specific car correlates to
@@ -32,13 +33,46 @@ class LatControlTorque(LatControl):
     self.use_steering_angle = self.torque_params.useSteeringAngle
     self.steering_angle_deadzone_deg = self.torque_params.steeringAngleDeadzoneDeg
 
+    # carrot
+    self.frame = 0
+    self.params = Params()
+    self.lateralTorqueCustom = self.params.get_int("LateralTorqueCustom")
+    self.latAccelFactor_default = self.torque_params.latAccelFactor
+    self.latAccelOffset_default = self.torque_params.latAccelOffset
+    self.friction_default = self.torque_params.friction
+    self.carrotLatControl = False
+    self.dampingFactor = 0
+    self.error_last = 0.0
+
+
   def update_live_torque_params(self, latAccelFactor, latAccelOffset, friction):
+    if self.lateralTorqueCustom > 0: 
+      return
+
     self.torque_params.latAccelFactor = latAccelFactor
     self.torque_params.latAccelOffset = latAccelOffset
     self.torque_params.friction = friction
 
-  def update(self, active, CS, VM, params, steer_limited, desired_curvature, calibrated_pose):
+  def update(self, active, CS, VM, params, steer_limited, desired_curvature, desired_curvature_now, calibrated_pose):
+    self.frame += 1
+    if self.frame % 10 == 0:
+      lateralTorqueCustom = self.params.get_int("LateralTorqueCustom")
+      self.carrotLatControl = self.params.get_bool("CarrotLatControl")
+      self.dampingFactor = self.params.get_float("DampingFactor") * 0.01
+      if lateralTorqueCustom > 0:
+        self.torque_params.latAccelFactor = self.params.get_float("LateralTorqueAccelFactor")*0.001
+        self.torque_params.friction = self.params.get_float("LateralTorqueFriction")*0.001
+        lateralTorqueKd = self.params.get_float("LateralTorqueKd")*0.01
+        self.pid._k_d = [[0], [lateralTorqueKd]]
+        self.torque_params.latAccelOffset = self.latAccelOffset_default
+      elif self.lateralTorqueCustom > 1:  # 1 -> 0, reset to default
+        self.torque_params.latAccelFactor = self.latAccelFactor_default
+        self.torque_params.friction = self.friction_default
+        self.torque_params.latAccelOffset = self.latAccelOffset_default
+      self.lateralTorqueCustom = lateralTorqueCustom
+     
     pid_log = log.ControlsState.LateralTorqueState.new_message()
+    steeringRate = math.radians(CS.steeringRateDeg)
     if not active:
       output_torque = 0.0
       pid_log.active = False
@@ -61,7 +95,11 @@ class LatControlTorque(LatControl):
       lateral_accel_deadzone = curvature_deadzone * CS.vEgo ** 2
 
       low_speed_factor = interp(CS.vEgo, LOW_SPEED_X, LOW_SPEED_Y)**2
-      setpoint = desired_lateral_accel + low_speed_factor * desired_curvature
+      desired_lateral_accel_now = desired_curvature_now * CS.vEgo ** 2
+      if self.carrotLatControl:
+        setpoint = desired_lateral_accel_now + low_speed_factor * desired_curvature_now
+      else:
+        setpoint = desired_lateral_accel + low_speed_factor * desired_curvature
       measurement = actual_lateral_accel + low_speed_factor * actual_curvature
       gravity_adjusted_lateral_accel = desired_lateral_accel - roll_compensation
       torque_from_setpoint = self.torque_from_lateral_accel(LatControlInputs(setpoint, roll_compensation, CS.vEgo, CS.aEgo), self.torque_params,
@@ -75,10 +113,15 @@ class LatControlTorque(LatControl):
 
       freeze_integrator = steer_limited or CS.steeringPressed or CS.vEgo < 5
       output_torque = self.pid.update(pid_log.error,
+                                      error_rate=pid_log.error - self.error_last,
                                       feedforward=ff,
                                       speed=CS.vEgo,
                                       freeze_integrator=freeze_integrator)
 
+      damping_torque = - self.dampingFactor * steeringRate
+      output_torque += damping_torque
+
+      self.error_last = pid_log.error
       pid_log.active = True
       pid_log.p = self.pid.p
       pid_log.i = self.pid.i
@@ -86,7 +129,7 @@ class LatControlTorque(LatControl):
       pid_log.f = self.pid.f
       pid_log.output = -output_torque
       pid_log.actualLateralAccel = actual_lateral_accel
-      pid_log.desiredLateralAccel = desired_lateral_accel
+      pid_log.desiredLateralAccel = desired_lateral_accel_now
       pid_log.saturated = self._check_saturation(self.steer_max - abs(output_torque) < 1e-3, CS, steer_limited)
 
     # TODO left is positive in this convention
