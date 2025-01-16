@@ -3,7 +3,7 @@ from collections import namedtuple
 
 from cereal import log
 
-ThermalConfig = namedtuple('ThermalConfig', ['cpu', 'gpu', 'mem', 'bat', 'pmic'])
+ThermalConfig = namedtuple('ThermalConfig', ['cpu', 'gpu', 'mem', 'pmic', 'intake', 'exhaust'])
 NetworkType = log.DeviceState.NetworkType
 
 
@@ -39,10 +39,6 @@ class HardwareBase(ABC):
 
   @abstractmethod
   def get_device_type(self):
-    pass
-
-  @abstractmethod
-  def get_sound_card_online(self):
     pass
 
   @abstractmethod
@@ -109,9 +105,6 @@ class HardwareBase(ABC):
     pass
 
   def get_modem_version(self):
-    return None
-
-  def get_modem_nv(self):
     return None
 
   @abstractmethod

@@ -14,9 +14,6 @@ class Pc(HardwareBase):
   def get_device_type(self):
     return "pc"
 
-  def get_sound_card_online(self):
-    return True
-
   def reboot(self, reason=None):
     print("REBOOT!")
 
@@ -24,7 +21,7 @@ class Pc(HardwareBase):
     print("uninstall")
 
   def get_imei(self, slot):
-    return "%015d" % random.randint(0, 1 << 32)
+    return f"{random.randint(0, 1 << 32):015d}"
 
   def get_serial(self):
     return "cccccccc"
@@ -57,7 +54,7 @@ class Pc(HardwareBase):
     print("SHUTDOWN!")
 
   def get_thermal_config(self):
-    return ThermalConfig(cpu=((None,), 1), gpu=((None,), 1), mem=(None, 1), bat=(None, 1), pmic=((None,), 1))
+    return ThermalConfig(cpu=((None,), 1), gpu=((None,), 1), mem=(None, 1), pmic=((None,), 1), intake=(None, 1), exhaust=(None, 1))
 
   def set_screen_brightness(self, percentage):
     pass
